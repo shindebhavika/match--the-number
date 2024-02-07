@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match The Number</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Mukta:wght@200;400;500;600&family=Poppins:ital,wght@0,200;0,300;0,500;0,600;0,800;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Ubuntu:ital,wght@0,500;0,700;1,400;1,500&display=swap');
+
+        html {
+            font-size: 62.5%;
+        }
+
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+
+
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+
+            font-family: 'Ubuntu', sans-serif;
+            ;
+        }
+
+
+
+        #main {
+            height: 100%;
+            width: 100%;
+            background-color: lightgreen;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #panel {
+            /* display: flex; */
+            text-align: center;
+            justify-content: center;
+            height: 80%;
+            width: 80%;
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            /* max-width: 50%; */
+
+        }
+
+        #panel-top {
+            /* padding: 0 30%; */
+            display: flex;
+            width: 100%;
+            height: 100%;
+
+            color: white;
+            font-size: 2rem;
+            align-items: center;
+            justify-content: space-around;
+            /* padding: 1rem; */
+            /* border: 2px solid red; */
+            width: 60%;
+
+
+        }
+
+
+
+        .panel-top-parent {
+            width: 100%;
+            height: 10rem;
+            border: 2px solid rgb(32, 31, 31);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgb(20, 66, 20);
+            /* background-color: #162f22; */
+
+        }
+
+        .elem {
+
+            width: 10%;
+            display: flex;
+            /* background-color: red; */
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+            ;
+
+
+        }
+
+        .box {
+            color: darkgreen;
+            padding: 1rem 2rem;
+            background-color: white;
+            border-radius: 5px;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+
+
+        .panel-bottom-parent {
+            padding: 2rem;
+            width: 100%;
+            height: calc(100% - 10rem);
+            /* background-color: black; */
+            white-space: nowrap;
+            overflow-x: auto;
+            overflow-y: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-bottom: 2rem;
+            /* background-color: red; */
+
+
+        }
+
+        .panel-bottom-parent::-webkit-scrollbar {
+            /* display: none; */
+        }
+
+        /* .page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    width: 90%;
+
+} */
+
+        #panel-bottom {
+            width: 100%;
+            height: 100%;
+            /* height: 1000px; */
+            /* border: 2px solid red; */
+            display: flex;
+            /* padding: 20rem; */
+            gap: 10px;
+            flex-wrap: wrap;
+            /* justify-content: space-around; */
+            color: white;
+            font-size: 1.5rem;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: black;
+            /* background-color: black; */
+
+        }
+
+        .bubble {
+            color: white;
+            height: 60px;
+            width: 60px;
+            background-color: rgb(20, 66, 20);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* margin-top: 2rem; */
+
+
+        }
+
+        .bubble:hover {
+            background-color: #0bbe0b;
+            font-size: 2em;
+            cursor: pointer;
+
+
+        }
+
+        #play-again {
+            height: 40px;
+            background-color: #0bbe0b;
+
+            text-align: center;
+            border-radius: 5%;
+            display: inline-block;
+            margin: 0 auto;
+            padding: 10px 20px;
+            box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+            /* border: 2px solid red; */
+            margin-bottom: 5rem;
+        }
+
+        #play-again h3 {
+            /* color: darkgreen; */
+            font-size: 2rem;
+        }
+
+        #play-again:hover {
+            transform: rotate(-5deg);
+            background-color: #4ab44a;
+        }
+
+        #restart {
+            /* border: 2px solid red; */
+        }
+
+        @media (max-width:1166px) {
+            #panel-top {
+
+                justify-content: space-between;
+                /* padding: 1rem; */
+                /* border: 2px solid red; */
+                width: 50%;
+
+
+            }
+        }
+
+        @media (max-width:850px) {
+            #panel-top {
+
+                justify-content: space-evenly;
+                width: 100%;
+            }
+        }
+
+        @media (max-width:700px) {
+            .box {
+                color: darkgreen;
+                padding: .8rem 1rem;
+                background-color: white;
+                border-radius: 5px;
+                font-size: 2rem;
+                font-weight: 600;
+            }
+
+            #panel-top {
+
+                justify-content: space-around;
+                width: 100%;
+            }
+
+        }
+
+        @media (max-width:500px) {
+            #panel-top {
+
+                width: 100%;
+                margin-right: 2rem;
+            }
+
+            .box {
+
+                padding: .4rem .5rem;
+
+            }
+        }
+
+        @media (max-width:420px) {
+            #panel-top {
+
+                width: 100%;
+                margin-right: 2rem;
+                font-size: 1.6rem;
+                justify-content: space-around;
+            }
+
+            .box {
+
+                padding: .3rem .5rem;
+                font-size: 1.5rem;
+
+            }
+
+            #restart {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="main">
+        <div id="panel">
+            <div class="panel-top-parent">
+                <div id="panel-top">
+                    <div class="elem">
+                        <h4>Hit</h4>
+                        <div class="box" id="hitVal">5</div>
+                    </div>
+                    <div class="elem">
+                        <h4>Timer</h4>
+                        <div class="box" id="timer">60</div>
+                    </div>
+                    <div class="elem">
+                        <h4>Scores</h4>
+                        <div class="box" id="scoreVal">0</div>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-bottom-parent">
+                <div id="panel-bottom">
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        var score = 0
+        function increaseScore() {
+            score += 10;
+            document.querySelector('#scoreVal').textContent = score
+        }
+
+
+
+        function makeBubble() {
+            let addElement = ""
+            for (let i = 0; i <= 95; i++) {
+                let randomNo = Math.floor(Math.random() * i)
+                addElement += `<div class="bubble">${randomNo}</div>
+        `}
+            document.querySelector('#panel-bottom').innerHTML = addElement
+
+        }
+        makeBubble();
+
+        function Timer() {
+            let time = 60;
+            let timeInterval = setInterval(function t() {
+                if (time > 0) {
+                    time--
+                    document.getElementById('timer').textContent = time
+                }
+                else {
+                    clearInterval(timeInterval)
+                    document.getElementById('panel-bottom').innerHTML = `<div id="restart"><h1>thank you 😊 <br><br> your total score is ${score}</h1>   <img style="height: 200px; width: 200px;" src="https://i.pinimg.com/originals/b4/72/a1/b472a187696137c70e6456450b99c351.gif" alt=""><br><br><br><br><br><br><br><button id="play-again"><h3>Play Again</h3></button></div>
+                    `
+                    document.getElementById('play-again').addEventListener('click', resetGame);
+                }
+            }, 1000)
+
+
+        }
+        Timer()
+        var randomNoHit = ""
+        function hitValue() {
+            randomNoHit = Math.floor(Math.random() * 10)
+            document.getElementById('hitVal').textContent = randomNoHit
+        }
+        hitValue()
+
+        function HitAndScore(event) {
+            if (event.target.textContent === String(randomNoHit)) {
+
+                increaseScore();
+                makeBubble();
+                hitValue();
+            }
+            else {
+                resetGame();
+
+
+            }
+        }
+
+        function resetGame() {
+            makeBubble();
+            hitValue();
+            score = 0;
+            document.querySelector('#scoreVal').textContent = score;
+            Timer();
+        }
+
+
+
+
+        document.getElementById('panel-bottom').addEventListener('click', HitAndScore)
+        // Initial setup
+        makeBubble();
+        hitValue();
+        Timer();
+
+
+    </script>
+
+
+</body>
+
+</html>
