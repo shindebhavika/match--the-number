@@ -327,62 +327,56 @@
 
 
     <script>
+        var score = 0;
+        var randomNoHit = "";
 
-        var score = 0
         function increaseScore() {
             score += 10;
-            document.querySelector('#scoreVal').textContent = score
+            document.querySelector('#scoreVal').textContent = score;
         }
-
-
 
         function makeBubble() {
-            let addElement = ""
-            for (let i = 0; i <= 95; i++) {
-                let randomNo = Math.floor(Math.random() * i)
-                addElement += `<div class="bubble">${randomNo}</div>
-        `}
-            document.querySelector('#panel-bottom').innerHTML = addElement
-
+            let addElement = "";
+            for (let i = 0; i < 95; i++) {
+                let randomNo = Math.floor(Math.random() * 10);
+                addElement += `<div class="bubble">${randomNo}</div>`;
+            }
+            document.querySelector('#panel-bottom').innerHTML = addElement;
         }
-        makeBubble();
 
         function Timer() {
             let time = 60;
-            let timeInterval = setInterval(function t() {
+            setInterval(function () {
                 if (time > 0) {
-                    time--
-                    document.getElementById('timer').textContent = time
-                }
-                else {
-                    clearInterval(timeInterval)
-                    document.getElementById('panel-bottom').innerHTML = `<div id="restart"><h1>thank you 😊 <br><br> your total score is ${score}</h1>   <img style="height: 200px; width: 200px;" src="https://i.pinimg.com/originals/b4/72/a1/b472a187696137c70e6456450b99c351.gif" alt=""><br><br><br><br><br><br><br><button id="play-again"><h3>Play Again</h3></button></div>
-                    `
+                    time--;
+                    document.getElementById('timer').textContent = time;
+                } else {
+                    clearInterval();
+                    document.getElementById('panel-bottom').innerHTML = `
+                        <div id="restart">
+                            <h1>Thank you 😊<br><br>Your total score is ${score}</h1>
+                            <img style="height: 200px; width: 200px;" src="https://i.pinimg.com/originals/b4/72/a1/b472a187696137c70e6456450b99c351.gif" alt="">
+                            <br><br><br><br><br><br><br><button id="play-again"><h3>Play Again</h3></button>
+                        </div>`;
                     document.getElementById('play-again').addEventListener('click', resetGame);
                 }
-            }, 1000)
-
-
+            }, 1000);
         }
-        Timer()
-        var randomNoHit = ""
+
         function hitValue() {
-            randomNoHit = Math.floor(Math.random() * 10)
-            document.getElementById('hitVal').textContent = randomNoHit
+            randomNoHit = Math.floor(Math.random() * 10);
+            document.getElementById('hitVal').textContent = randomNoHit;
         }
-        hitValue()
 
         function HitAndScore(event) {
-            if (event.target.textContent === String(randomNoHit)) {
-
-                increaseScore();
-                makeBubble();
-                hitValue();
-            }
-            else {
-                resetGame();
-
-
+            if (event.target.classList.contains('bubble')) {
+                if (event.target.textContent === String(randomNoHit)) {
+                    increaseScore();
+                    makeBubble();
+                    hitValue();
+                } else {
+                    resetGame();
+                }
             }
         }
 
@@ -394,18 +388,13 @@
             Timer();
         }
 
+        document.getElementById('panel-bottom').addEventListener('click', HitAndScore);
 
-
-
-        document.getElementById('panel-bottom').addEventListener('click', HitAndScore)
         // Initial setup
         makeBubble();
         hitValue();
         Timer();
-
-
     </script>
-
 
 </body>
 
